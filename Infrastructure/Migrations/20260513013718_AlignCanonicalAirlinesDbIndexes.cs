@@ -24,35 +24,33 @@ namespace Infrastructure.Migrations
                   old_idx text;
                   new_idx text := 'IX_reservation_status_transitions_source_status_id_target_status_id';
                 BEGIN
-                  IF to_regclass('airlinesdb.reservation_status_transitions') IS NULL THEN
-                    RETURN;
+                  IF to_regclass('airlinesdb.reservation_status_transitions') IS NOT NULL THEN
+                    IF NOT EXISTS (
+                      SELECT 1 FROM pg_indexes
+                      WHERE schemaname = 'airlinesdb'
+                        AND tablename = 'reservation_status_transitions'
+                        AND LOWER(indexname) = LOWER(new_idx)
+                    ) THEN
+                      SELECT indexname INTO old_idx
+                      FROM pg_indexes
+                      WHERE schemaname = 'airlinesdb'
+                        AND tablename = 'reservation_status_transitions'
+                        AND LOWER(indexname) LIKE 'ix_reservation_status_transitions_source_status%'
+                        AND LOWER(indexname) <> LOWER(new_idx)
+                      ORDER BY length(indexname) DESC
+                      LIMIT 1;
+
+                      IF old_idx IS NOT NULL THEN
+                        EXECUTE format('ALTER INDEX airlinesdb.%I RENAME TO %I', old_idx, new_idx);
+                      END IF;
+                    END IF;
                   END IF;
 
-                  IF EXISTS (
-                    SELECT 1 FROM pg_indexes
-                    WHERE schemaname = 'airlinesdb'
-                      AND tablename = 'reservation_status_transitions'
-                      AND LOWER(indexname) = LOWER(new_idx)
-                  ) THEN
-                    RETURN;
-                  END IF;
-
-                  SELECT indexname INTO old_idx
-                  FROM pg_indexes
-                  WHERE schemaname = 'airlinesdb'
-                    AND tablename = 'reservation_status_transitions'
-                    AND LOWER(indexname) LIKE 'ix_reservation_status_transitions_source_status%'
-                    AND LOWER(indexname) <> LOWER(new_idx)
-                  ORDER BY length(indexname) DESC
-                  LIMIT 1;
-
-                  IF old_idx IS NOT NULL THEN
-                    EXECUTE format('ALTER INDEX airlinesdb.%I RENAME TO %I', old_idx, new_idx);
+                  IF to_regclass('airlinesdb.fares') IS NOT NULL THEN
+                    CREATE INDEX IF NOT EXISTS "IX_fares_route_id_cabin_type_id_passenger_type_id_season_id"
+                      ON airlinesdb.fares (route_id, cabin_type_id, passenger_type_id, season_id);
                   END IF;
                 END $$;
-
-                CREATE INDEX IF NOT EXISTS "IX_fares_route_id_cabin_type_id_passenger_type_id_season_id"
-                    ON airlinesdb.fares (route_id, cabin_type_id, passenger_type_id, season_id);
                 """);
         }
 
@@ -69,33 +67,35 @@ namespace Infrastructure.Migrations
                   cur_idx text;
                   old_trunc text := 'IX_reservation_status_transitions_source_status_id_target_stat~';
                 BEGIN
-                  IF to_regclass('airlinesdb.reservation_status_transitions') IS NULL THEN
-                    RETURN;
+                  IF to_regclass('airlinesdb.reservation_status_transitions') IS NOT NULL THEN
+                    SELECT indexname INTO cur_idx
+                    FROM pg_indexes
+                    WHERE schemaname = 'airlinesdb'
+                      AND tablename = 'reservation_status_transitions'
+                      AND LOWER(indexname) = LOWER('IX_reservation_status_transitions_source_status_id_target_status_id')
+                    LIMIT 1;
+
+                    IF cur_idx IS NOT NULL
+                       AND NOT EXISTS (
+                         SELECT 1 FROM pg_indexes
+                         WHERE schemaname = 'airlinesdb'
+                           AND tablename = 'reservation_status_transitions'
+                           AND indexname = old_trunc
+                       ) THEN
+                      EXECUTE format('ALTER INDEX airlinesdb.%I RENAME TO %I', cur_idx, old_trunc);
+                    END IF;
                   END IF;
 
-                  SELECT indexname INTO cur_idx
-                  FROM pg_indexes
-                  WHERE schemaname = 'airlinesdb'
-                    AND tablename = 'reservation_status_transitions'
-                    AND LOWER(indexname) = LOWER('IX_reservation_status_transitions_source_status_id_target_status_id')
-                  LIMIT 1;
+                  IF to_regclass('airlinesdb.fares') IS NOT NULL THEN
+                    CREATE INDEX IF NOT EXISTS "IX_fares_route_id"
+                      ON airlinesdb.fares (route_id);
+                  END IF;
 
-                  IF cur_idx IS NOT NULL
-                     AND NOT EXISTS (
-                       SELECT 1 FROM pg_indexes
-                       WHERE schemaname = 'airlinesdb'
-                         AND tablename = 'reservation_status_transitions'
-                         AND indexname = old_trunc
-                     ) THEN
-                    EXECUTE format('ALTER INDEX airlinesdb.%I RENAME TO %I', cur_idx, old_trunc);
+                  IF to_regclass('airlinesdb.airlines') IS NOT NULL THEN
+                    CREATE UNIQUE INDEX IF NOT EXISTS "IX_airlines_iata_code"
+                      ON airlinesdb.airlines (iata_code);
                   END IF;
                 END $$;
-
-                CREATE INDEX IF NOT EXISTS "IX_fares_route_id"
-                    ON airlinesdb.fares (route_id);
-
-                CREATE UNIQUE INDEX IF NOT EXISTS "IX_airlines_iata_code"
-                    ON airlinesdb.airlines (iata_code);
                 """);
         }
     }
