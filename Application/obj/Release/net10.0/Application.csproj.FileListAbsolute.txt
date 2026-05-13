@@ -13,3 +13,4 @@ c:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeG
 c:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeGestionDeTiquetesApi-main\Application\obj\Release\net10.0\refint\Application.dll
 c:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeGestionDeTiquetesApi-main\Application\obj\Release\net10.0\Application.pdb
 c:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeGestionDeTiquetesApi-main\Application\obj\Release\net10.0\ref\Application.dll
+C:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeGestionDeTiquetesApi-main\Application\obj\Release\net10.0\Application.sourcelink.json

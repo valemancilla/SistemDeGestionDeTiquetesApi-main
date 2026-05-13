@@ -143,3 +143,4 @@ c:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeG
 c:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeGestionDeTiquetesApi-main\Api\obj\Release\net10.0\Api.pdb
 c:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeGestionDeTiquetesApi-main\Api\obj\Release\net10.0\Api.genruntimeconfig.cache
 c:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeGestionDeTiquetesApi-main\Api\obj\Release\net10.0\ref\Api.dll
+C:\Users\ASUS\Documents\PROGRAMACION\.NET\SistemDeGestionDeTiquetesApi\SistemDeGestionDeTiquetesApi-main\Api\obj\Release\net10.0\Api.sourcelink.json

@@ -55,13 +55,10 @@ namespace Infrastructure.Migrations
                   old_nombre_idx text;
                   old_codigo_idx text;
                 BEGIN
-                  IF NOT EXISTS (
+                  IF EXISTS (
                     SELECT 1 FROM information_schema.tables
                     WHERE table_schema = 'airlinesdb' AND table_name = 'documenttypes'
                   ) THEN
-                    RETURN;
-                  END IF;
-
                   IF EXISTS (
                     SELECT 1 FROM information_schema.columns
                     WHERE table_schema = 'airlinesdb' AND table_name = 'documenttypes' AND column_name = 'nombre'
@@ -107,6 +104,7 @@ namespace Infrastructure.Migrations
                     ALTER TABLE airlinesdb.documenttypes
                       ALTER COLUMN "Name" TYPE character varying(255),
                       ALTER COLUMN "Code" TYPE character varying(255);
+                  END IF;
                   END IF;
                 END $$;
                 """);
