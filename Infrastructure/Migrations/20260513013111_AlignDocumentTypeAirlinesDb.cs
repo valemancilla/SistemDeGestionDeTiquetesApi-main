@@ -13,356 +13,103 @@ namespace Infrastructure.Migrations
             migrationBuilder.EnsureSchema(
                 name: "airlinesdb");
 
-            migrationBuilder.RenameTable(
-                name: "users",
-                newName: "users",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "tickets",
-                newName: "tickets",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "ticket_statuses",
-                newName: "ticket_statuses",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "system_roles",
-                newName: "system_roles",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "staffavailability",
-                newName: "staffavailability",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "staff_positions",
-                newName: "staff_positions",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "staff",
-                newName: "staff",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "sessions",
-                newName: "sessions",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "seat_location_types",
-                newName: "seat_location_types",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "seasons",
-                newName: "seasons",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "routestops",
-                newName: "routestops",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "routes",
-                newName: "routes",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "rolepermissions",
-                newName: "rolepermissions",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "roadtypes",
-                newName: "roadtypes",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "reservationstatus",
-                newName: "reservationstatus",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "reservations",
-                newName: "reservations",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "reservationpassengers",
-                newName: "reservationpassengers",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "reservationflights",
-                newName: "reservationflights",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "reservation_status_transitions",
-                newName: "reservation_status_transitions",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "regions",
-                newName: "regions",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "phonecodes",
-                newName: "phonecodes",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "personphones",
-                newName: "personphones",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "personemails",
-                newName: "personemails",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "permissions",
-                newName: "permissions",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "people",
-                newName: "people",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "payments",
-                newName: "payments",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "paymentmethods",
-                newName: "paymentmethods",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "payment_statuses",
-                newName: "payment_statuses",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "payment_method_types",
-                newName: "payment_method_types",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "passengers",
-                newName: "passengers",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "passenger_types",
-                newName: "passenger_types",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "invoices",
-                newName: "invoices",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "invoiceitems",
-                newName: "invoiceitems",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "invoice_item_types",
-                newName: "invoice_item_types",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "flightstatustransitions",
-                newName: "flightstatustransitions",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "flightseats",
-                newName: "flightseats",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "flights",
-                newName: "flights",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "flightassignments",
-                newName: "flightassignments",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "flight_statuses",
-                newName: "flight_statuses",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "flight_roles",
-                newName: "flight_roles",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "fares",
-                newName: "fares",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "emaildomains",
-                newName: "emaildomains",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "documenttypes",
-                newName: "documenttypes",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "countries",
-                newName: "countries",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "continents",
-                newName: "continents",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "clients",
-                newName: "clients",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "cities",
-                newName: "cities",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "checkins",
-                newName: "checkins",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "checkin_statuses",
-                newName: "checkin_statuses",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "card_types",
-                newName: "card_types",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "card_issuers",
-                newName: "card_issuers",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "cabintypes",
-                newName: "cabintypes",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "cabinconfiguration",
-                newName: "cabinconfiguration",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "availability_statuses",
-                newName: "availability_statuses",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "airports",
-                newName: "airports",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "airportairline",
-                newName: "airportairline",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "airlines",
-                newName: "airlines",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "aircraftmodels",
-                newName: "aircraftmodels",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "aircraftmanufacturers",
-                newName: "aircraftmanufacturers",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "aircraft",
-                newName: "aircraft",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameTable(
-                name: "addresses",
-                newName: "addresses",
-                newSchema: "airlinesdb");
-
-            migrationBuilder.RenameColumn(
-                name: "nombre",
-                schema: "airlinesdb",
-                table: "documenttypes",
-                newName: "Name");
-
-            migrationBuilder.RenameColumn(
-                name: "codigo",
-                schema: "airlinesdb",
-                table: "documenttypes",
-                newName: "Code");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_documenttypes_nombre",
-                schema: "airlinesdb",
-                table: "documenttypes",
-                newName: "IX_DocumentTypes_Name");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_documenttypes_codigo",
-                schema: "airlinesdb",
-                table: "documenttypes",
-                newName: "IX_DocumentTypes_Code");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                schema: "airlinesdb",
-                table: "documenttypes",
-                type: "character varying(255)",
-                maxLength: 255,
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "character varying(50)",
-                oldMaxLength: 50);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Code",
-                schema: "airlinesdb",
-                table: "documenttypes",
-                type: "character varying(255)",
-                maxLength: 255,
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "character varying(10)",
-                oldMaxLength: 10);
+            // Idempotente: si el DDL canónico ya creó tablas en airlinesdb y EF dejó copias en public,
+            // ALTER ... SET SCHEMA fallaría (42P07). Solo movemos cuando no hay homónimo en airlinesdb.
+            migrationBuilder.Sql(
+                """
+                DO $$
+                DECLARE
+                  t text;
+                  tables text[] := ARRAY[
+                    'users','tickets','ticket_statuses','system_roles','staffavailability','staff_positions','staff','sessions',
+                    'seat_location_types','seasons','routestops','routes','rolepermissions','roadtypes','reservationstatus',
+                    'reservations','reservationpassengers','reservationflights','reservation_status_transitions','regions',
+                    'phonecodes','personphones','personemails','permissions','people','payments','paymentmethods',
+                    'payment_statuses','payment_method_types','passengers','passenger_types','invoices','invoiceitems',
+                    'invoice_item_types','flightstatustransitions','flightseats','flights','flightassignments',
+                    'flight_statuses','flight_roles','fares','emaildomains','documenttypes','countries','continents',
+                    'clients','cities','checkins','checkin_statuses','card_types','card_issuers','cabintypes',
+                    'cabinconfiguration','availability_statuses','airports','airportairline','airlines','aircraftmodels',
+                    'aircraftmanufacturers','aircraft','addresses'
+                  ];
+                BEGIN
+                  FOREACH t IN ARRAY tables
+                  LOOP
+                    IF EXISTS (
+                      SELECT 1 FROM information_schema.tables
+                      WHERE table_schema = 'public' AND table_name = t
+                    ) AND NOT EXISTS (
+                      SELECT 1 FROM information_schema.tables
+                      WHERE table_schema = 'airlinesdb' AND table_name = t
+                    ) THEN
+                      EXECUTE format('ALTER TABLE public.%I SET SCHEMA airlinesdb', t);
+                    END IF;
+                  END LOOP;
+                END $$;
+                """);
+
+            migrationBuilder.Sql(
+                """
+                DO $$
+                DECLARE
+                  old_nombre_idx text;
+                  old_codigo_idx text;
+                BEGIN
+                  IF NOT EXISTS (
+                    SELECT 1 FROM information_schema.tables
+                    WHERE table_schema = 'airlinesdb' AND table_name = 'documenttypes'
+                  ) THEN
+                    RETURN;
+                  END IF;
+
+                  IF EXISTS (
+                    SELECT 1 FROM information_schema.columns
+                    WHERE table_schema = 'airlinesdb' AND table_name = 'documenttypes' AND column_name = 'nombre'
+                  ) THEN
+                    ALTER TABLE airlinesdb.documenttypes RENAME COLUMN nombre TO "Name";
+                    ALTER TABLE airlinesdb.documenttypes RENAME COLUMN codigo TO "Code";
+                  END IF;
+
+                  SELECT c.relname INTO old_nombre_idx
+                  FROM pg_class c
+                  JOIN pg_namespace n ON n.oid = c.relnamespace
+                  JOIN pg_index i ON i.indexrelid = c.oid
+                  JOIN pg_class t ON t.oid = i.indrelid
+                  JOIN pg_namespace tn ON tn.oid = t.relnamespace
+                  WHERE n.nspname = 'airlinesdb' AND c.relkind = 'i'
+                    AND tn.nspname = 'airlinesdb' AND t.relname = 'documenttypes'
+                    AND c.relname IN ('IX_documenttypes_nombre', 'ix_documenttypes_nombre')
+                  LIMIT 1;
+
+                  IF old_nombre_idx IS NOT NULL THEN
+                    EXECUTE format('ALTER INDEX airlinesdb.%I RENAME TO %I', old_nombre_idx, 'IX_DocumentTypes_Name');
+                  END IF;
+
+                  SELECT c.relname INTO old_codigo_idx
+                  FROM pg_class c
+                  JOIN pg_namespace n ON n.oid = c.relnamespace
+                  JOIN pg_index i ON i.indexrelid = c.oid
+                  JOIN pg_class t ON t.oid = i.indrelid
+                  JOIN pg_namespace tn ON tn.oid = t.relnamespace
+                  WHERE n.nspname = 'airlinesdb' AND c.relkind = 'i'
+                    AND tn.nspname = 'airlinesdb' AND t.relname = 'documenttypes'
+                    AND c.relname IN ('IX_documenttypes_codigo', 'ix_documenttypes_codigo')
+                  LIMIT 1;
+
+                  IF old_codigo_idx IS NOT NULL THEN
+                    EXECUTE format('ALTER INDEX airlinesdb.%I RENAME TO %I', old_codigo_idx, 'IX_DocumentTypes_Code');
+                  END IF;
+
+                  IF EXISTS (
+                    SELECT 1 FROM information_schema.columns
+                    WHERE table_schema = 'airlinesdb' AND table_name = 'documenttypes' AND column_name = 'Name'
+                  ) THEN
+                    ALTER TABLE airlinesdb.documenttypes
+                      ALTER COLUMN "Name" TYPE character varying(255),
+                      ALTER COLUMN "Code" TYPE character varying(255);
+                  END IF;
+                END $$;
+                """);
         }
 
         /// <inheritdoc />
