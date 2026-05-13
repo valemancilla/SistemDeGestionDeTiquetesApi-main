@@ -10,55 +10,93 @@ namespace Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_fares_route_id",
-                schema: "airlinesdb",
-                table: "fares");
+            // Idempotente: el DDL canónico puede no tener IX_fares_route_id / IX_airlines_iata_code,
+            // o ya tener el índice compuesto y nombres finales.
+            migrationBuilder.Sql(
+                """
+                DROP INDEX IF EXISTS airlinesdb."IX_fares_route_id";
+                DROP INDEX IF EXISTS airlinesdb.ix_fares_route_id;
+                DROP INDEX IF EXISTS airlinesdb."IX_airlines_iata_code";
+                DROP INDEX IF EXISTS airlinesdb.ix_airlines_iata_code;
 
-            migrationBuilder.DropIndex(
-                name: "IX_airlines_iata_code",
-                schema: "airlinesdb",
-                table: "airlines");
+                DO $$
+                DECLARE
+                  old_idx text;
+                  new_idx text := 'IX_reservation_status_transitions_source_status_id_target_status_id';
+                BEGIN
+                  IF to_regclass('airlinesdb.reservation_status_transitions') IS NULL THEN
+                    RETURN;
+                  END IF;
 
-            migrationBuilder.RenameIndex(
-                name: "IX_reservation_status_transitions_source_status_id_target_stat~",
-                schema: "airlinesdb",
-                table: "reservation_status_transitions",
-                newName: "IX_reservation_status_transitions_source_status_id_target_status_id");
+                  IF EXISTS (
+                    SELECT 1 FROM pg_indexes
+                    WHERE schemaname = 'airlinesdb'
+                      AND tablename = 'reservation_status_transitions'
+                      AND LOWER(indexname) = LOWER(new_idx)
+                  ) THEN
+                    RETURN;
+                  END IF;
 
-            migrationBuilder.CreateIndex(
-                name: "IX_fares_route_id_cabin_type_id_passenger_type_id_season_id",
-                schema: "airlinesdb",
-                table: "fares",
-                columns: new[] { "route_id", "cabin_type_id", "passenger_type_id", "season_id" });
+                  SELECT indexname INTO old_idx
+                  FROM pg_indexes
+                  WHERE schemaname = 'airlinesdb'
+                    AND tablename = 'reservation_status_transitions'
+                    AND LOWER(indexname) LIKE 'ix_reservation_status_transitions_source_status%'
+                    AND LOWER(indexname) <> LOWER(new_idx)
+                  ORDER BY length(indexname) DESC
+                  LIMIT 1;
+
+                  IF old_idx IS NOT NULL THEN
+                    EXECUTE format('ALTER INDEX airlinesdb.%I RENAME TO %I', old_idx, new_idx);
+                  END IF;
+                END $$;
+
+                CREATE INDEX IF NOT EXISTS "IX_fares_route_id_cabin_type_id_passenger_type_id_season_id"
+                    ON airlinesdb.fares (route_id, cabin_type_id, passenger_type_id, season_id);
+                """);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_fares_route_id_cabin_type_id_passenger_type_id_season_id",
-                schema: "airlinesdb",
-                table: "fares");
+            migrationBuilder.Sql(
+                """
+                DROP INDEX IF EXISTS airlinesdb."IX_fares_route_id_cabin_type_id_passenger_type_id_season_id";
+                DROP INDEX IF EXISTS airlinesdb.ix_fares_route_id_cabin_type_id_passenger_type_id_season_id;
 
-            migrationBuilder.RenameIndex(
-                name: "IX_reservation_status_transitions_source_status_id_target_status_id",
-                schema: "airlinesdb",
-                table: "reservation_status_transitions",
-                newName: "IX_reservation_status_transitions_source_status_id_target_stat~");
+                DO $$
+                DECLARE
+                  cur_idx text;
+                  old_trunc text := 'IX_reservation_status_transitions_source_status_id_target_stat~';
+                BEGIN
+                  IF to_regclass('airlinesdb.reservation_status_transitions') IS NULL THEN
+                    RETURN;
+                  END IF;
 
-            migrationBuilder.CreateIndex(
-                name: "IX_fares_route_id",
-                schema: "airlinesdb",
-                table: "fares",
-                column: "route_id");
+                  SELECT indexname INTO cur_idx
+                  FROM pg_indexes
+                  WHERE schemaname = 'airlinesdb'
+                    AND tablename = 'reservation_status_transitions'
+                    AND LOWER(indexname) = LOWER('IX_reservation_status_transitions_source_status_id_target_status_id')
+                  LIMIT 1;
 
-            migrationBuilder.CreateIndex(
-                name: "IX_airlines_iata_code",
-                schema: "airlinesdb",
-                table: "airlines",
-                column: "iata_code",
-                unique: true);
+                  IF cur_idx IS NOT NULL
+                     AND NOT EXISTS (
+                       SELECT 1 FROM pg_indexes
+                       WHERE schemaname = 'airlinesdb'
+                         AND tablename = 'reservation_status_transitions'
+                         AND indexname = old_trunc
+                     ) THEN
+                    EXECUTE format('ALTER INDEX airlinesdb.%I RENAME TO %I', cur_idx, old_trunc);
+                  END IF;
+                END $$;
+
+                CREATE INDEX IF NOT EXISTS "IX_fares_route_id"
+                    ON airlinesdb.fares (route_id);
+
+                CREATE UNIQUE INDEX IF NOT EXISTS "IX_airlines_iata_code"
+                    ON airlinesdb.airlines (iata_code);
+                """);
         }
     }
 }
